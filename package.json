@@ -1,0 +1,45 @@
+{
+  "name": "pc_vue3_project",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "lint:prettier": "prettier --cache --write \"src/**/*.{vue,ts,tsx}\"",
+    "lint:eslint": "eslint --cache --fix \"src/**/**.{vue,ts,tsx}\"",
+    "lint:style": "stylelint --fix \"src/**/*.{less,css}\"",
+    "lint": "pnpm run lint:prettier && pnpm run lint:eslint && pnpm run lint:style",
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "src/**/**.{vue,ts,tsx}": [
+      "pnpm run lint:eslint",
+      "pnpm run lint:prettier"
+    ],
+    "src/**/*.{css,less}": "pnpm run lint:style"
+  },
+  "dependencies": {
+    "vue": "^3.2.37"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^17.1.2",
+    "@commitlint/config-conventional": "^17.1.0",
+    "@typescript-eslint/eslint-plugin": "^5.40.0",
+    "@typescript-eslint/parser": "^5.40.0",
+    "@vitejs/plugin-vue": "^3.1.0",
+    "eslint": "^8.25.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-vue": "^9.6.0",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.3",
+    "prettier": "^2.7.1",
+    "stylelint": "^14.14.0",
+    "stylelint-config-prettier": "^9.0.3",
+    "stylelint-config-recommended": "^9.0.0",
+    "typescript": "^4.6.4",
+    "vite": "^3.1.0",
+    "vue-tsc": "^0.40.4"
+  }
+}
