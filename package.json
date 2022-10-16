@@ -14,13 +14,15 @@
     "prepare": "husky install"
   },
   "lint-staged": {
-    "src/**/**.{vue,ts,tsx}": [
+    "src/**/*.{vue,ts,tsx}": [
       "pnpm run lint:eslint",
       "pnpm run lint:prettier"
     ],
     "src/**/*.{css,less}": "pnpm run lint:style"
   },
   "dependencies": {
+    "pinia": "^2.0.23",
+    "pinia-plugin-persistedstate": "^2.3.0",
     "vue": "^3.2.37"
   },
   "devDependencies": {

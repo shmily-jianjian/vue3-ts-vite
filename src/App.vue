@@ -1,19 +1,17 @@
 <script setup lang="ts">
-// This starter template is using Vue 3 <script setup> SFCs
-// Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
-import HelloWorld from './components/HelloWorld.vue'
+import { storeToRefs } from 'pinia'
+import { globalStore } from '@/store/modules/global'
+
+const store = globalStore()
+const { changeUserInfo } = store
+const { userInfo } = storeToRefs(store)
 </script>
 
 <template>
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
-  </div>
-  <HelloWorld msg="Vite + Vue" />
+  <span>姓名: {{ userInfo.name }}</span>
+  <span>年龄: {{ userInfo.age }}</span>
+  <span>性别: {{ userInfo.sex }}</span>
+  <button @click="changeUserInfo">修改姓名</button>
 </template>
 
 <style scoped>
