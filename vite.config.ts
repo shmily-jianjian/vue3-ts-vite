@@ -27,6 +27,14 @@ export default defineConfig({
     }
   },
   server: {
-    open: true
+    open: true,
+    host: '0.0.0.0',
+    proxy: {
+      '/api': {
+        target: 'https://i.maoyan.com/api/mmdb/movie/v3',
+        changeOrigin: true,
+        rewrite: path => path.replace(/^\/api/, '')
+      }
+    }
   }
 })

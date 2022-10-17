@@ -4,12 +4,19 @@ import { NConfigProvider, darkTheme, zhCN, dateZhCN } from 'naive-ui'
 import type { GlobalTheme } from 'naive-ui'
 import { storeToRefs } from 'pinia'
 import { globalStore } from '@/store/modules/global'
+import { getMovies } from '@/api/test'
 
 const theme = ref<GlobalTheme | null>(null)
 
 const store = globalStore()
 const { changeUserInfo } = store
 const { userInfo } = storeToRefs(store)
+const movies = ref()
+
+const requestData = async () => {
+  const res = await getMovies()
+  movies.value = res.data.hot
+}
 const inputValue = ref(0)
 const timestamp = ref(1183135260000)
 </script>
@@ -26,6 +33,8 @@ const timestamp = ref(1183135260000)
     <n-date-picker v-model:value="timestamp" type="date" />
     <!-- <n-color-picker size="small" /> -->
   </n-config-provider>
+  <n-button type="success" @click="requestData">请求电影</n-button>
+  <main>电影: {{ JSON.stringify(movies) }}</main>
 </template>
 
 <style scoped>

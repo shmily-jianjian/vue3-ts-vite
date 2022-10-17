@@ -9,6 +9,7 @@ interface UserInfo {
   name: string
   age: number
   sex: string
+  token: string
 }
 
 export const globalStore = defineStore('globalStore', {
@@ -16,7 +17,8 @@ export const globalStore = defineStore('globalStore', {
     const userInfo: UserInfo = reactive({
       name: 'zhaojian',
       age: 23,
-      sex: '男'
+      sex: '男',
+      token: 'admin123'
     })
 
     const changeUserInfo = () => {
@@ -25,9 +27,11 @@ export const globalStore = defineStore('globalStore', {
 
     return { userInfo, changeUserInfo }
   },
-  persist: {
-    storage: localStorage,
-    paths: ['userInfo'],
-    key: 'userInfo'
-  }
+  persist: [
+    {
+      storage: localStorage,
+      paths: ['userInfo'],
+      key: 'userInfo'
+    }
+  ]
 })
