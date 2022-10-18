@@ -3,3 +3,4 @@
  */
 
 export * from './feedback'
+export * from './theme'
