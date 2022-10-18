@@ -9,6 +9,7 @@ declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     NButton: typeof import('naive-ui')['NButton']
     NDatePicker: typeof import('naive-ui')['NDatePicker']
+    NGlobalStyle: typeof import('naive-ui')['NGlobalStyle']
     NInputNumber: typeof import('naive-ui')['NInputNumber']
     NTag: typeof import('naive-ui')['NTag']
   }

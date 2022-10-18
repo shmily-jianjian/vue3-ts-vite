@@ -31,10 +31,10 @@ const timestamp = ref(1183135260000)
     <n-tag type="success" @click="theme = darkTheme">暗色</n-tag>
     <n-input-number v-model:value="inputValue" clearable />
     <n-date-picker v-model:value="timestamp" type="date" />
-    <!-- <n-color-picker size="small" /> -->
+    <n-global-style />
+    <n-button type="success" @click="requestData">请求电影</n-button>
+    <main>电影: {{ JSON.stringify(movies) }}</main>
   </n-config-provider>
-  <n-button type="success" @click="requestData">请求电影</n-button>
-  <main>电影: {{ JSON.stringify(movies) }}</main>
 </template>
 
 <style scoped>
