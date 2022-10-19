@@ -1,13 +1,10 @@
 <script lang="ts" setup>
+import { Login } from '@/api'
 import { message } from '@/config'
 import type { FormInst } from 'naive-ui'
 import { ref } from 'vue'
-
-const formRef = ref<FormInst | null>(null)
-const formValue = ref({
-  userName: '',
-  passWorld: ''
-})
+import { globalStore } from '@/store/modules/global'
+import { useRouter } from 'vue-router'
 
 const rules = {
   userName: {
@@ -22,11 +19,33 @@ const rules = {
   }
 }
 
+const formRef = ref<FormInst | null>(null)
+const formValue = ref({
+  userName: '',
+  passWorld: ''
+})
+const loading = ref<boolean>(false)
+const store = globalStore()
+const router = useRouter()
+
 const handleValidateClick = (e: MouseEvent) => {
   e.preventDefault()
-  formRef.value?.validate(errors => {
+  formRef.value?.validate(async errors => {
     if (!errors) {
-      message.success('登录成功')
+      loading.value = true
+      try {
+        const res = await Login({
+          userName: formValue.value.userName,
+          passWorld: formValue.value.passWorld
+        })
+        if (res.code === 0) {
+          store.saveToken(res.data.token)
+          message.success('登录成功')
+          router.replace('/')
+        }
+      } finally {
+        loading.value = false
+      }
     }
   })
 }
@@ -54,7 +73,12 @@ const handleValidateClick = (e: MouseEvent) => {
             />
           </n-form-item>
           <n-form-item>
-            <n-button type="primary" block @click="handleValidateClick">
+            <n-button
+              :loading="loading"
+              type="primary"
+              block
+              @click="handleValidateClick"
+            >
               登录
             </n-button>
           </n-form-item>

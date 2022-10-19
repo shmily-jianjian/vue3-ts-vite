@@ -17,3 +17,9 @@ const { theme } = storeToRefs(themeStore())
     </div>
   </n-config-provider>
 </template>
+
+<style>
+.n-layout {
+  height: 100vh;
+}
+</style>
