@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { NConfigProvider } from 'naive-ui'
 import { themeOverrides } from '@/config/theme'
-import checkTheme from './components/checkTheme.vue'
 import { themeStore } from './store/modules/theme'
 import { storeToRefs } from 'pinia'
 
@@ -10,16 +9,8 @@ const { theme } = storeToRefs(themeStore())
 
 <template>
   <n-config-provider :theme-overrides="themeOverrides" :theme="theme">
-    <div class="wrap">
-      <checkTheme class="checkTheme" />
-      <n-global-style />
-      <router-view></router-view>
-    </div>
+    <router-view></router-view>
   </n-config-provider>
 </template>
 
-<style>
-.n-layout {
-  height: 100vh;
-}
-</style>
+<style></style>
